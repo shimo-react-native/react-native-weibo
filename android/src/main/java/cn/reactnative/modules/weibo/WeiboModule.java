@@ -37,6 +37,7 @@ import com.facebook.imagepipeline.request.ImageRequestBuilder;
 import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
@@ -113,6 +114,7 @@ public class WeiboModule extends ReactContextBaseJavaModule implements ActivityE
     public void initialize() {
         super.initialize();
         gModule = this;
+        registerShare();
         getReactApplicationContext().addActivityEventListener(this);
     }
 
@@ -136,10 +138,13 @@ public class WeiboModule extends ReactContextBaseJavaModule implements ActivityE
         return mSinaShareAPI;
     }
 
+    @ReactMethod
+    public void isWeiboAppInstalled(Promise promise) {
+        promise.resolve(mSinaShareAPI.isWeiboAppInstalled());
+    }
 
     @ReactMethod
     public void login(final ReadableMap config, final Callback callback) {
-
         AuthInfo sinaAuthInfo = this._genAuthInfo(config);
         mSinaSsoHandler = new SsoHandler(getCurrentActivity(), sinaAuthInfo);
         mSinaSsoHandler.authorize(this.genWeiboAuthListener());
