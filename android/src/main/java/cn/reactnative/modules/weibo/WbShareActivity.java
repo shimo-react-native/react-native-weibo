@@ -72,6 +72,9 @@ public class WbShareActivity extends Activity implements WbShareCallback {
 
     public static void share(Context ctx, Bundle msgBundle) {
         Intent intent = new Intent(ctx, WbShareActivity.class);
+        if (!(ctx instanceof Activity)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
         intent.putExtra(SHARE_MSG, msgBundle);
         ctx.startActivity(intent);
     }

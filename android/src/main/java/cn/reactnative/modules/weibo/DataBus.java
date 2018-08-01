@@ -27,16 +27,16 @@ public class DataBus {
         bus = new HashMap<>();
     }
 
-    public ObserveWrapper with(String key) {
-        return with(key, Object.class);
-    }
-
     private static class SingletonHolder {
         private static final DataBus DEFAULT_BUS = new DataBus();
     }
 
     public static DataBus get() {
         return DataBus.SingletonHolder.DEFAULT_BUS;
+    }
+
+    public ObserveWrapper with(String key) {
+        return with(key, Object.class);
     }
 
     public <T> ObserveWrapper<T> with(String key, Class<T> type) {
