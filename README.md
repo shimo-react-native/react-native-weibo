@@ -1,15 +1,25 @@
 # react-native-weibo
 
 React Native的新浪微博登录插件, react-native版本需要0.17.0及以上
+
 ## 如何安装
 
-### 1.首先安装npm包
+### 安装npm包
 
 ```bash
 npm install react-native-weibo --save
 ```
 
-### 2.link
+### 安装 pod 依赖
+
+Podfile
+
+```
+pod 'Weibo_SDK'
+```
+
+### link
+
 #### 自动link方法
 
 ```bash
@@ -17,12 +27,14 @@ react-native link
 ```
 
 #### 手动link~（如果不能够自动link）
-#####ios
+
+##### ios
+
 a.打开XCode's工程中, 右键点击Libraries文件夹 ➜ Add Files to <...>
 b.去node_modules ➜ react-native-weibo ➜ ios ➜ 选择 RCTWeiboAPI.xcodeproj
 c.在工程Build Phases ➜ Link Binary With Libraries中添加libRCTWeiboAPI.a
 
-#####Android
+##### Android
 
 ```
 // file: android/settings.gradle
@@ -73,7 +85,9 @@ public class MainApplication extends Application implements ReactApplication {
 ```
 
 ### 3.工程配置
+
 #### ios配置
+
 将`node_modules/react-native-weibo/ios/libWeiboSDK/WeiboSDK.bundle`加入到工程中(必须，很重要，不然登录的时候会crash)
 
 在工程target的`Build Phases->Link Binary with Libraries`中加入`libRCTWeiboAPI.a、libsqlite3.tbd、libz.tbd、ImageIO.framework、SystemConfiguration.framework、Security.framework、CoreTelephony.framework、CoreText.framework`
